@@ -1,5 +1,10 @@
 package fr.diginamic.recensement.entites;
 
+/**
+ * Représent une ville avec codeRegion (String), nomRegion (String), codeDept
+ * (String), nomCommune (String), populationTotale (int)
+ *
+ */
 public class Ville {
 	private String codeRegion;
 	private String nomRegion;
@@ -7,6 +12,20 @@ public class Ville {
 	private String nomCommune;
 	private int populationTotale;
 	
+	/**
+	 * Constructeur avec des paramètres:
+	 * 
+	 * @param codeRegion
+	 *            - code d'une région
+	 * @param nomRegion
+	 *            - nom d'une région
+	 * @param codeDept
+	 *            - code d'un departement
+	 * @param nomCommune
+	 *            - nom d'une commune
+	 * @param populationTotale
+	 *            - population totale d'une commune
+	 */
 	public Ville(String codeRegion, String nomRegion, String codeDept, String nomCommune,
 			int populationTotale) {
 		super();
@@ -17,6 +36,7 @@ public class Ville {
 		this.populationTotale = populationTotale;
 	};
 	
+	@Override
 	public String toString(){
 		return codeRegion+" "+nomRegion+" "+codeDept+" "+ nomCommune+" "+ populationTotale;
 	}

@@ -15,6 +15,11 @@ import org.slf4j.LoggerFactory;
 import fr.diginamic.recensement.entites.Ville;
 import fr.diginamic.recensement.utils.DbManager;
 
+/**
+ * RegionDaoJdbc implément les methodes de RecensementDao et crée une connection
+ * par injection dans le constructeur
+ *
+ */
 public class RegionDaoJdbc implements RecensementDao {
 	private static final Logger LOG = LoggerFactory.getLogger(RegionDaoJdbc.class);
 	private Statement statement;
@@ -22,7 +27,7 @@ public class RegionDaoJdbc implements RecensementDao {
 	private static ResultSet cursor;
 
 	/**
-	 * 
+	 * constructeur sans paramètres avec l'overture de connection
 	 */
 	public RegionDaoJdbc() {
 		try {

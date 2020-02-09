@@ -6,6 +6,10 @@ import java.util.Scanner;
 
 import fr.diginamic.recensement.dao.VilleDaoJdbc;
 
+/**
+ * Recherche de la Population d'une Ville choisie par utilisateur
+ *
+ */
 public class RecherchePopulationVille {
 
 	public void traiter(VilleDaoJdbc dao, Scanner scanner) {

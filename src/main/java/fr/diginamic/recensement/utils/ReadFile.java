@@ -15,6 +15,12 @@ import fr.diginamic.recensement.IntegrationRecensement;
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
 
+/**
+ * Lire le fichier .csv dans un objet type Recensement - une Liste de Villes
+ * avec des paramètres codeRegion, nomRegion, codeDepartement, nomCommune,
+ * populationTotale
+ *
+ */
 public class ReadFile {
 	private static final Logger LOG = LoggerFactory.getLogger(ReadFile.class);
 

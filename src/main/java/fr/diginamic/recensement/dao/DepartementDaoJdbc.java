@@ -14,6 +14,11 @@ import org.slf4j.LoggerFactory;
 import fr.diginamic.recensement.entites.Ville;
 import fr.diginamic.recensement.utils.DbManager;
 
+/**
+ * DepartementDaoJdbc implément les methodes de RecensementDao et crée une
+ * connection par injection dans le constructeur
+ *
+ */
 public class DepartementDaoJdbc implements RecensementDao {
 	private static final Logger LOG = LoggerFactory.getLogger(DepartementDaoJdbc.class);
 	private static Statement statement;
@@ -21,7 +26,7 @@ public class DepartementDaoJdbc implements RecensementDao {
 	private static ResultSet cursor;
 
 	/**
-	 * 
+	 * constructeur sans paramètres avec l'overture de connection
 	 */
 	public DepartementDaoJdbc() {
 		try {
@@ -41,14 +46,15 @@ public class DepartementDaoJdbc implements RecensementDao {
 	@Override
 	public void insert(List<Ville> villes) {
 		try {
-		long startD = System.currentTimeMillis();
+			long startD = System.currentTimeMillis();
 
 			String insertDept = "INSERT IGNORE INTO departement SELECT code_departement, SUM(population_totale) FROM ville GROUP BY code_departement ASC";
-		PreparedStatement insertStatementDept = connection.prepareStatement(insertDept);
-		insertStatementDept.executeUpdate();
-		connection.commit();
-		long endD = System.currentTimeMillis();
-		LOG.info("Temps de création table departement : " + (endD - startD) + "ms");
+			PreparedStatement insertStatementDept = connection.prepareStatement(insertDept);
+			insertStatementDept.executeUpdate();
+			connection.commit();
+
+			long endD = System.currentTimeMillis();
+			LOG.info("Temps de création table departement : " + (endD - startD) + "ms");
 		} catch (SQLException e) {
 			LOG.error("SQL exception ", e.getMessage());
 			try {
@@ -60,23 +66,6 @@ public class DepartementDaoJdbc implements RecensementDao {
 		}
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void close() {
-		try {
-			if (statement != null) {
-				statement.close();
-			} else if (connection != null) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			LOG.error(e.getMessage(), e);
-		}
-	}
 
 	@Override
 	public HashMap<String, Integer> recherchePopulation(String dept) {
@@ -125,5 +114,19 @@ public class DepartementDaoJdbc implements RecensementDao {
 		return extractPop;
 	}
 
+	@Override
+	public void update() {
+	}
 
+	public void close() {
+		try {
+			if (statement != null) {
+				statement.close();
+			} else if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			LOG.error(e.getMessage(), e);
+		}
+	}
 }

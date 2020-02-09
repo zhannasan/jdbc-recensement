@@ -16,6 +16,11 @@ import org.slf4j.LoggerFactory;
 import fr.diginamic.recensement.entites.Ville;
 import fr.diginamic.recensement.utils.DbManager;
 
+/**
+ * RegionDaoJdbc implément les methodes de RecensementDao et crée une connection
+ * par injection dans le constructeur
+ *
+ */
 public class VilleDaoJdbc implements RecensementDao {
 	private static final Logger LOG = LoggerFactory.getLogger(VilleDaoJdbc.class);
 
@@ -24,9 +29,9 @@ public class VilleDaoJdbc implements RecensementDao {
 	private static ResultSet cursor;
 
 	/**
-	 * @param connection
-	 * @param statement
+	 * constructeur sans paramètres avec l'overture de connection
 	 */
+
 	public VilleDaoJdbc() {
 		try {
 			connection = DbManager.getConnection();
@@ -130,12 +135,13 @@ public class VilleDaoJdbc implements RecensementDao {
 	@Override
 	public void update() {
 		try { // -----fusion Lyon arrondissements-----
-		String insertUpdate = "INSERT IGNORE INTO ville (SELECT SUM(id), code_region, nom_region, code_departement, 'Lyon', SUM(population_totale) FROM ville WHERE nom_commune LIKE '%Lyon%arrond%')";
-		statement.executeUpdate(insertUpdate);
-		LOG.info(insertUpdate);
-		String deleteUpdate = "DELETE FROM ville WHERE nom_commune LIKE '%lyon%arrondiss%'";
-		statement.executeUpdate(deleteUpdate);
-		LOG.info(deleteUpdate);
+			String insertUpdate = "INSERT INTO ville (SELECT SUM(id), code_region, nom_region, code_departement, 'Lyon', SUM(population_totale) FROM ville WHERE nom_commune LIKE '%Lyon%arrond%')";
+			statement.executeUpdate(insertUpdate);
+			LOG.info(insertUpdate);
+			String deleteUpdate = "DELETE FROM ville WHERE nom_commune LIKE '%lyon%arrondiss%'";
+			statement.executeUpdate(deleteUpdate);
+			LOG.info("Updated ville");
+
 		} catch (SQLException e) {
 			LOG.error("SQL exception ", e.getMessage());
 			try {

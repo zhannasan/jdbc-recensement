@@ -6,6 +6,10 @@ import java.util.Scanner;
 
 import fr.diginamic.recensement.dao.DepartementDaoJdbc;
 
+/**
+ * Recherche de la Population d'un Departement choisi par utilisateur
+ *
+ */
 public class RecherchePopulationDept {
 
 	public void traiter(DepartementDaoJdbc dao, Scanner scanner) {

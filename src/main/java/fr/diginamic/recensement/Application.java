@@ -3,8 +3,6 @@ package fr.diginamic.recensement;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import fr.diginamic.recensement.dao.DepartementDaoJdbc;
 import fr.diginamic.recensement.dao.RegionDaoJdbc;
@@ -19,18 +17,14 @@ import fr.diginamic.recensement.services.RecherchePopulationRegion;
 import fr.diginamic.recensement.services.RecherchePopulationVille;
 
 public class Application {
-	private static final Logger LOG = LoggerFactory.getLogger(IntegrationRecensement.class);
 	
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		VilleDaoJdbc villeDao = new VilleDaoJdbc();
 		DepartementDaoJdbc deptDao = new DepartementDaoJdbc();
 		RegionDaoJdbc regionDao = new RegionDaoJdbc();
-		
-		if (villeDao == null) {
-			LOG.error("Une erreur est survenue et l'application va se fermer.");
-			System.exit(0);
-		}
+		villeDao.update(); // lock wait time out exceeded si executé dans
+							// integration recensement.
 		int input = 0;
 		do {
 			afficherMenu();

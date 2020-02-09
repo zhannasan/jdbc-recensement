@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 import fr.diginamic.recensement.dao.RegionDaoJdbc;
 
+/**
+ * Recherche de la Population d'une Région choisie par utilisateur
+ */
 public class RecherchePopulationRegion {
 	public void traiter(RegionDaoJdbc dao, Scanner scanner) {
 		System.out.println("Veuillez choisir une région.");
